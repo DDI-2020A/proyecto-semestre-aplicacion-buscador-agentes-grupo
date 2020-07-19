@@ -10,6 +10,19 @@ background-color: blue;
 /* card */
 
 /* search */
+div.tarjeta-busqueda{background-color: rgb(90, 199, 90);}
+input[type = "radio"]{ display:none;}
+p.clasificacion{font-size: 30px;}
+p label{color: #ffffff;}
+.clasificacion {
+    direction: rtl;
+    unicode-bidi: bidi-override;
+  }
+p.label:hover, label:hover ~ label {
+  color:gold;
+}
 
-
+input[type="radio"]:checked ~ label {
+  color: gold;
+}
 /* authentication */

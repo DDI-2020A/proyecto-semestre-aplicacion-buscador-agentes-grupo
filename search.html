@@ -11,10 +11,33 @@
 </head>
 <body>
     <!-- search -->
-    <div class="container buscar">
+    <div class="container barra-busqueda">
         <div class="row">
-            <div class="col-2"></div>
-            <div class="col-8 tarjeta-busqueda">
+            <div class="col-2 col-xs-2"></div>
+            <div class="col-8 col-xs-8">
+                <form>
+                    <div class="form-group row">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control">
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-primary-button" >Buscar</button>
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="form-group row button">
+                        <button type="button" class="btn btn-secondary-button" >Ordenar</button>
+                        <button type="button" class="btn btn-secondary-button" >Filtrar</button>
+                    </div>
+                    <div class="space-for-cards"></div>
+                </form>
+            </div>
+            <div class="col-2 col-xs-2"></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-3 col-xs-2"></div>
+            <div class="col-6 col-xs-8 tarjeta-busqueda">
                 <form>
                     <div class="form-group row">
                         <label for="name" class="col-sm-5 col-form-label">Nombre</label>
@@ -53,7 +76,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col-2"></div>
+            <div class="col-3 col-xs-2"></div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" 

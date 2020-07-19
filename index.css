@@ -10,6 +10,26 @@ background-color: blue;
 /* card */
 
 /* search */
+div.barra-busqueda{background-color: aliceblue;}
+.btn-primary-button{
+    background-color: rgb(90, 199, 90);
+    color: #ffffff;
+    width: 150px;
+}
+.btn-secondary-button{
+    background-color: rgb(81, 92, 241);
+    color: #ffffff;
+    width: 150px;
+    margin: 0 10px 0 0;
+}
+.space-for-cards{
+    background-color: grey;
+    width: 100%;
+    height: 500px;
+}
+
+
+
 div.tarjeta-busqueda{background-color: rgb(90, 199, 90);}
 input[type = "radio"]{ display:none;}
 p.clasificacion{font-size: 30px;}
@@ -21,7 +41,7 @@ p label{color: #ffffff;}
 p.label:hover, label:hover ~ label {
   color:gold;
 }
-
+.form-group .row .button{text-align: justify;}
 input[type="radio"]:checked ~ label {
   color: gold;
 }

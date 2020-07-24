@@ -1,0 +1,11 @@
+.root{
+    height: 700px;
+}
+
+.form{
+    padding-top: 100px;
+    margin: 0 auto;
+    max-width: 300px;
+    max-height: 300px;
+}
+

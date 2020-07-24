@@ -1,0 +1,104 @@
+html{
+	font-family: 'Open Sans', sans-serif;
+}
+.container{
+	color: green;
+}
+header{
+	background-color: #00897b;
+	color: #ffffff;
+}
+.encabezado{
+	display: flex;
+	color: green;
+}
+.identificacion{
+	margin-top: 40px;
+    margin-left: 50px;
+}
+.rounded{
+	border: solid 1px;
+    border-radius: 23px;
+    width: 150px;
+    margin-left: 100px;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+.etiquetado{
+	margin-left: 200px;
+}
+.etiqueta{
+	margin-top: 10px;
+    margin-left: 150px;
+    margin-bottom: 52px;
+    margin-right: 120px;
+    border: solid 1px;
+    background-color: orange;
+}
+.btn{
+	margin-left: 178px;
+    margin-top: 46px;
+}
+h4{
+	margin-left: 20px;
+    margin-right: 20px;
+    top: 20px;
+    margin-bottom: 10px;
+}
+
+
+
+/*-------- CALIFICAR*/
+
+.calificar{
+	margin-left: 100px;
+    margin-top: 15px;
+
+}
+
+#form {
+  width: 250px;
+  height: 50px;
+}
+
+#form p {
+  text-align: center;
+  
+}
+
+#form label {
+  font-size: 20px;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+label {
+  color: grey;
+}
+
+.clasificacion {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+label:hover,
+label:hover ~ label {
+  color: green;
+}
+
+input[type="radio"]:checked ~ label {
+  color: orange;
+}
+
+/*------*/
+
+
+.info1{
+	margin-top: 20px;
+	margin-left: 100px;
+}
+span{
+	color:black;
+}

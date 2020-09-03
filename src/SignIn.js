@@ -29,7 +29,7 @@ const SignForm = () => {
               await app;
               const result = await app.auth().signInWithEmailAndPassword(email, password);
               console.log(result.user.email + ' signed ');
-            //todo : add user to global state,redirect to home
+            //todo : dispatch userData, redirect to home
             } catch (error) {
               console.log(error);
             }

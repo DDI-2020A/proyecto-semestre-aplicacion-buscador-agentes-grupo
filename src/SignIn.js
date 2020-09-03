@@ -19,8 +19,21 @@ const tailLayout = {
 };
 
 const SignForm = () => {
-    const onFinish = values => {
+    const onFinish = async values => {
         console.log('Success:', values);
+            const { email, password } = values;
+      
+            const { app } = await import('./firebase_sdk');
+      
+            try {
+              await app;
+              const result = await app.auth().signInWithEmailAndPassword(email, password);
+              console.log(result.user.email + ' signed ');
+            //todo : add user to global state,redirect to home
+            } catch (error) {
+              console.log(error);
+            }
+          
     };
 
     const onFinishFailed = errorInfo => {
@@ -53,12 +66,12 @@ const SignForm = () => {
             onFinishFailed={onFinishFailed}
         >
             <Form.Item
-                label="Username"
-                name="username"
+                label="Correo"
+                name="email"
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your username!',
+                        message: 'Porfavor escribe tu email!',
                     },
                 ]}
             >

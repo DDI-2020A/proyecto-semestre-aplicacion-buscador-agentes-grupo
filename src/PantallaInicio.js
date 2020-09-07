@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import { Button, Layout, PageHeader, Carousel, Row, Col } from 'antd';
 import { Form, Input, Select, Modal } from 'antd';
 import { WhatsAppOutlined, FacebookOutlined, TwitterOutlined } from '@ant-design/icons'
-import image1 from '../public/image1.jpg'
-import image2 from '../public/image2.jpg'
-import image3 from '../public/image3.jpg'
-import image4 from '../public/image4.jpg'
+import image1 from './images/image1.jpg'
+import image2 from './images/image2.jpg'
+import image3 from './images/image3.jpg'
+import image4 from './images/image4.jpg'
 import './PantallaInicio.css'
 
 const { Header, Content, Footer } = Layout;
@@ -36,14 +36,14 @@ const PantallaInicio = () => {
                     <Button type="primary">Iniciar Sesión</Button>
                   </Link>
 
-                  <Switch>
-                    <Route path="/signup">
-                      <Signup/>
-                    </Route>
-                    <Route path="/login">
-                      <Login/>
-                    </Route>
-                  </Switch>
+                  {/*<Switch>*/}
+                  {/*  <Route path="/signup">*/}
+                  {/*    <Signup/>*/}
+                  {/*  </Route>*/}
+                  {/*  <Route path="/login">*/}
+                  {/*    <Login/>*/}
+                  {/*  </Route>*/}
+                  {/*</Switch>*/}
                 </>
               }
             ></PageHeader>

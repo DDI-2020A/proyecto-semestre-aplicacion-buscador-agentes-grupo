@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 //redux imports
 import { useDispatch } from "react-redux";
 import { useSelector } from 'react-redux';
-import { setUserAction, fetchUserDataThunk } from './redux';
+import { setUserAction, fetchUserDataThunk } from '../../redux';
 
 const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
   const currentUser = useSelector(state => state.general.currentUser);

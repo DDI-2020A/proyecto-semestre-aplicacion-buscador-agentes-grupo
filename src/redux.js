@@ -34,9 +34,9 @@ const reducer = (state = initialState, action) => {
 export const fetchUserDataThunk = (uid) => {
 
   return async (dispatch) => {
-    const {firebase} = await import('./base');
+    const {db} = await import('./utils/firebase_sdk');
     
-    const userDoc = await firebase.firestore().collection('users').doc(uid).get();
+    const userDoc = await db.collection('users').doc(uid).get();
     dispatch(setUserData(userDoc.data()));
       
   }

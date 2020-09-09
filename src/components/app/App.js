@@ -3,7 +3,7 @@ import './App.css';
 import SignIn from '../sign/SignIn';
 import SignUp from '../sign/SignUp';
 import Home from './Home';
-import {  } from "l";
+import PrivateRoute from "../routing/PrivateRoute";
 
 /*ENRUTAMIENTO*/
 import {

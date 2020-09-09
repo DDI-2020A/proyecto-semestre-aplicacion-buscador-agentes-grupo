@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { setUserAction, fetchUserDataThunk } from '../../redux';
 
 const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
-  const currentUser = useSelector(state => state.general.currentUser);
+  const currentUser = useSelector(state => state.currentUser);
   const dispatch = useDispatch();
   const fetchUserData = uid => dispatch(fetchUserDataThunk(uid));
   const setUser = currentUser => dispatch(setUserAction(currentUser));

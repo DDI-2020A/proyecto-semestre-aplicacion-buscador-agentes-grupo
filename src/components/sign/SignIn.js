@@ -33,7 +33,7 @@ const SignForm = () => {
               const result = await app.auth().signInWithEmailAndPassword(email, password);
               console.log(result.user.email + ' signed ');
             //todo : dispatch userData
-            history.push('./Home');
+            history.push('/Home');
             } catch (error) {
               console.log(error);
             }

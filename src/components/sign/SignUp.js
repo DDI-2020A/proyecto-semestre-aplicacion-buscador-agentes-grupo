@@ -5,6 +5,7 @@ import { Row, Col } from 'antd';
 import { Switch } from 'antd';
 //api
 import { saveUserDoc } from './../../utils/firestore';
+import {useHistory} from 'react-router-dom';
 
 const layout = {
     labelCol: {
@@ -28,6 +29,7 @@ const validateMessages = {
 
 const SignForm = () => {
     const [visible, setVisible] = useState(true);
+    const history = useHistory();
 
     const switched = checked => {
         setVisible(checked);
@@ -66,6 +68,7 @@ const SignForm = () => {
                 unsuscribe();
                 console.log('user created, listener removed');
                 //todo: redirect to home
+                history.push('./Home');
             });
 
         } catch (e) {

@@ -3,6 +3,8 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import '../app/App.css'
 import { Row, Col } from 'antd';
 
+import {useHistory} from 'react-router-dom';
+
 const layout = {
     labelCol: {
         span: 8,
@@ -19,6 +21,7 @@ const tailLayout = {
 };
 
 const SignForm = () => {
+    const history = useHistory();
     const onFinish = async values => {
         console.log('Success:', values);
             const { email, password } = values;
@@ -29,7 +32,8 @@ const SignForm = () => {
               await app;
               const result = await app.auth().signInWithEmailAndPassword(email, password);
               console.log(result.user.email + ' signed ');
-            //todo : dispatch userData, redirect to home
+            //todo : dispatch userData
+            history.push('./Home');
             } catch (error) {
               console.log(error);
             }

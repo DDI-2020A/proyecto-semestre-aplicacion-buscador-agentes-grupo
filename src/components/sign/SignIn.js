@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
-import './App.css'
+import '../app/App.css'
 import { Row, Col } from 'antd';
 
 const layout = {
@@ -23,7 +23,7 @@ const SignForm = () => {
         console.log('Success:', values);
             const { email, password } = values;
       
-            const { app } = await import('./firebase_sdk');
+            const { app } = await import('./../../utils/firebase_sdk');
       
             try {
               await app;

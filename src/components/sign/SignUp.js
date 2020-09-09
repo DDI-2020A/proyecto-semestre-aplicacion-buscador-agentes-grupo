@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Form, Input, InputNumber, Button } from 'antd';
-import './App.css'
+import '../app/App.css'
 import { Row, Col } from 'antd';
 import { Switch } from 'antd';
 //api
-import { saveUserDoc } from './firestore';
+import { saveUserDoc } from './../../utils/firestore';
 
 const layout = {
     labelCol: {
@@ -36,7 +36,7 @@ const SignForm = () => {
     const onFinish = async values => {
         const { name, lname, email, password, address, phone } = values;
 
-        const { app, db } = await import('./firebase_sdk');
+        const { app, db } = await import('./../../utils/firebase_sdk');
 
         try {
             await app.auth().createUserWithEmailAndPassword(email, password);

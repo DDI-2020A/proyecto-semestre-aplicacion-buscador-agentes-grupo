@@ -1,7 +1,9 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
-import './App.css'
+import '../app/App.css'
 import { Row, Col } from 'antd';
+
+import {useHistory} from 'react-router-dom';
 
 const layout = {
     labelCol: {
@@ -19,8 +21,23 @@ const tailLayout = {
 };
 
 const SignForm = () => {
-    const onFinish = values => {
+    const history = useHistory();
+    const onFinish = async values => {
         console.log('Success:', values);
+            const { email, password } = values;
+      
+            const { app } = await import('./../../utils/firebase_sdk');
+      
+            try {
+              await app;
+              const result = await app.auth().signInWithEmailAndPassword(email, password);
+              console.log(result.user.email + ' signed ');
+            //todo : dispatch userData
+            history.push('./Home');
+            } catch (error) {
+              console.log(error);
+            }
+          
     };
 
     const onFinishFailed = errorInfo => {
@@ -53,12 +70,12 @@ const SignForm = () => {
             onFinishFailed={onFinishFailed}
         >
             <Form.Item
-                label="Username"
-                name="username"
+                label="Correo"
+                name="email"
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your username!',
+                        message: 'Porfavor escribe tu email!',
                     },
                 ]}
             >

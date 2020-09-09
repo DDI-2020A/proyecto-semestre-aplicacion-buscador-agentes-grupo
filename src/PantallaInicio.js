@@ -12,14 +12,7 @@ import './PantallaInicio.css'
 const { Header, Content, Footer } = Layout;
 
 const PantallaInicio = () => {
-  const imagesPlace = [
-    image1,
-    image2,
-    image3,
-    image4
-  ]
 
-  const [ image, setImages ] = useState( imagesPlace.image1 )
   return (
     <>
       <Layout>

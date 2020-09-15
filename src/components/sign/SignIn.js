@@ -3,7 +3,10 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import '../app/App.css'
 import { Row, Col } from 'antd';
 
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+//redux
+import { setUserAction } from '../../redux'
+import { useDispatch, useSelector } from "react-redux";
 
 const layout = {
     labelCol: {
@@ -22,22 +25,26 @@ const tailLayout = {
 
 const SignForm = () => {
     const history = useHistory();
+    const dispatch = useDispatch();
+    const setUser = currentUser => dispatch(setUserAction(currentUser));
+  
     const onFinish = async values => {
         console.log('Success:', values);
-            const { email, password } = values;
-      
-            const { app } = await import('./../../utils/firebase_sdk');
-      
-            try {
-              await app;
-              const result = await app.auth().signInWithEmailAndPassword(email, password);
-              console.log(result.user.email + ' signed ');
-            //todo : dispatch userData
-            history.push('./Home');
-            } catch (error) {
-              console.log(error);
-            }
-          
+        const { email, password } = values;
+
+        const { app } = await import('./../../utils/firebase_sdk');
+
+        try {
+            await app;
+            const result = await app.auth().signInWithEmailAndPassword(email, password);
+            console.log(result.user.email + ' signed ');
+            //dispatches userData, redirect to home
+            setUser(result.user);
+            history.push('/Home');
+        } catch (error) {
+            console.log(error);
+        }
+
     };
 
     const onFinishFailed = errorInfo => {

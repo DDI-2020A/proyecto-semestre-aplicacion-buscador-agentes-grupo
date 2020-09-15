@@ -68,7 +68,7 @@ const SignForm = () => {
                 unsuscribe();
                 console.log('user created, listener removed');
                 //todo: redirect to home
-                history.push('./Home');
+                history.push('/Home');
             });
 
         } catch (e) {

@@ -22,7 +22,7 @@ const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
             if (user) {
               fetchUserData(user.uid);
               setUser(user);
-              console.log(user.email + ' status changed to : logged ')
+              console.log(user.email + ' status changed to : logged ');
             } else {
               setUser(null);
               console.log('status changed to : not logged ')

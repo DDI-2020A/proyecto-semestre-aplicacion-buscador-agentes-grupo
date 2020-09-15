@@ -3,12 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from '../src/components/app/App';
 import * as serviceWorker from './serviceWorker';
-import PantallaInicio from './PantallaInicio';
 
 ReactDOM.render(
   // <React.StrictMode>
-  //   <App />
-  <PantallaInicio/>
+    <App />
   // </React.StrictMode>
   ,
   document.getElementById('root')

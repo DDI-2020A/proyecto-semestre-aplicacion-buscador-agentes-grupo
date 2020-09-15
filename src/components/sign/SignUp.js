@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Form, Input, InputNumber, Button } from 'antd';
-import './App.css'
+import '../app/App.css'
 import { Row, Col } from 'antd';
 import { Switch } from 'antd';
 //api
-import { saveUserDoc } from './firestore';
+import { saveUserDoc } from './../../utils/firestore';
+import {useHistory} from 'react-router-dom';
 
 const layout = {
     labelCol: {
@@ -28,6 +29,7 @@ const validateMessages = {
 
 const SignForm = () => {
     const [visible, setVisible] = useState(true);
+    const history = useHistory();
 
     const switched = checked => {
         setVisible(checked);
@@ -36,7 +38,7 @@ const SignForm = () => {
     const onFinish = async values => {
         const { name, lname, email, password, address, phone } = values;
 
-        const { app, db } = await import('./firebase_sdk');
+        const { app, db } = await import('./../../utils/firebase_sdk');
 
         try {
             await app.auth().createUserWithEmailAndPassword(email, password);
@@ -66,6 +68,7 @@ const SignForm = () => {
                 unsuscribe();
                 console.log('user created, listener removed');
                 //todo: redirect to home
+                history.push('./Home');
             });
 
         } catch (e) {

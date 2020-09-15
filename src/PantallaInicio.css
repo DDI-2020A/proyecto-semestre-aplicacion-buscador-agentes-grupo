@@ -1,0 +1,35 @@
+.ant-layout-header {background: #ffffff;}
+.layout-header{
+    position: relative;
+}
+img{
+    height: 450px;
+    color: #ffffff;
+    text-align: center;
+}
+.quienes-somos{text-align: center;}
+.section-carousel{
+    padding: 50px 0;
+    background-color: #f0f0f0cc;
+}
+.section-contact{
+    padding: 50px 0;
+    background-color: #ffffff;
+}
+.contact-us-title{
+    text-align: center;
+}
+
+.content-centered--md{
+    color: #ffffff;
+    width: 840px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #000000;
+}
+.info-item{
+    text-align: right;
+}
+.send-quest{text-align: right;}
+.icon-list{background-color:#f0f0f0cc;}

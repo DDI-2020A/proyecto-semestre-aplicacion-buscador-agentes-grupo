@@ -1,20 +1,31 @@
 .ant-layout-header {background: #ffffff;}
+
+.PageHeader-landingpage{
+    background-color: #2ECC71;
+    box-shadow: 5px 0 15px black;
+}
 .layout-header{
     position: relative;
 }
 img{
     height: 450px;
+    width:100%;
     color: #ffffff;
     text-align: center;
 }
 .quienes-somos{text-align: center;}
 .section-carousel{
     padding: 50px 0;
-    background-color: #f0f0f0cc;
+    background-color: #f0f0cc;
 }
 .section-contact{
+    background-image: url('./images/background_cantact.jpg');
     padding: 50px 0;
-    background-color: #ffffff;
+    background-color: transparent;
+    background-image: image(transparent);
+    /*background-color: #82E0AA;*/
+    /*filter:alpha(opacity=60);*/
+    /*opacity:0.8;*/
 }
 .contact-us-title{
     text-align: center;
@@ -32,4 +43,4 @@ img{
     text-align: right;
 }
 .send-quest{text-align: right;}
-.icon-list{background-color:#f0f0f0cc;}
+.icon-list{background-color:#2ECC71;}

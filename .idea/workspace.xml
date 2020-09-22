@@ -19,13 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44425692-fff2-4f41-865b-71507a48a3b7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/comments/Agents.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/comments/Agents.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/comments/AppComments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/comments/AppComments.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/comments/Comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/comments/Comments.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/comments/CommentsList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/comments/CommentsList.js" afterDir="false" />
-    </list>
+    <list default="true" id="44425692-fff2-4f41-865b-71507a48a3b7" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -77,7 +71,7 @@
       <option name="presentableId" value="Default" />
       <updated>1599497252709</updated>
       <workItem from="1599497255617" duration="5498000" />
-      <workItem from="1600785971475" duration="1498000" />
+      <workItem from="1600785971475" duration="1730000" />
     </task>
     <servers />
   </component>

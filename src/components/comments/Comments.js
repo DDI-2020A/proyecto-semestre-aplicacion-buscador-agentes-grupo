@@ -8,24 +8,23 @@ const Comments = ( {} ) => {
 
   const data = [
     {
-      actions: [ < span key='comment-list-reply-to-0'> Reply to < /span>],
+      actions: [ <span key='comment-list-reply-to-0'>Reply to</span> ],
       author: 'Han Solo',
       avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
       content: (
-      <p> Algo algo </p>
+        <p>Algo algo Algo algo Algo algo Algo algo Algo algo Algo algo</p>
       ),
-      datetime:(
+      datetime: (
         <Tooltip
           title={ moment()
             .subtract( 1, 'days' )
-            .format( 'YYYY-MM-DD HH:mm:ss' )
-          }
+            .format( 'YYYY-MM-DD HH:mm:ss' ) }
         >
-          <span>
-          { moment()
-            .subtract( 1, 'days' )
-            .fromNow() }
-          </span>
+                    <span>
+                    { moment()
+                      .subtract( 1, 'days' )
+                      .fromNow() }
+                    </span>
         </Tooltip>
       ),
     },
@@ -49,7 +48,9 @@ const Comments = ( {} ) => {
           </li>
         ) }
       />
-      </>
-    )
+    </>
+  )
+
 };
+
 export default Comments;

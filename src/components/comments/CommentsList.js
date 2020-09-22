@@ -17,75 +17,67 @@ const CommentsList = ( { onAddComment, ...props } ) => {
   }, [ props.movieComments ] );
 
   const commentForm = () => (
-    < >
-    < Form
-  name = "Coment-form"
-  onFinish = { onAddComment }
-    // onFinishFailed={onFinishFailed}
-    >
-
-
-    < FormItem
-  label = "Comentario"
-  name = "text"
-  rules = { [{ required: true, message: 'Ingresa tu comentario' }] }
-    >
-    < TextArea
-  rows = { 4 }
-  />
-  < /FormItem>
-  < FormItem >
-  < Button
-  htmlType = "submit"
-  type = "primary"
-  style = {
-  {
-    marginTop:15
-  }
-}>
-  Agregar
-  Comentario
-  < /Button>
-  < /FormItem>
-  < /Form>
-
-  < />
-
-)
-  ;
+    <>
+      <Form
+        name="Coment-form"
+        onFinish={ onAddComment }
+        // onFinishFailed={onFinishFailed}
+      >
+        < FormItem
+          label="Comentario"
+          name="text"
+          rules={ [ { required: true, message: 'Ingresa tu comentario' } ] }
+        >
+          <TextArea
+            rows={ 4 }
+          />
+        </FormItem>
+        <FormItem>
+          <Button
+            htmlType="submit"
+            type="primary"
+            style={
+              {
+                marginTop: 15
+              }
+            }>
+            Agregar Comentario
+          </Button>
+        </FormItem>
+      </Form>
+    </>
+  );
   return (
-    < >
-    < List
-  className = "comment-list"
-  //header={`${data.length} replies`}
-  itemLayout = "horizontal"
-  dataSource = { movieComments }
-  renderItem = { item
-=>
-  (
-  < li >
-  < Comment
-  //actions={item.actions}
-  //author={item.author}
-  //avatar={item.avatar}
-  content = { item.text }
-  //datetime={item.datetime}
-  />
-  < /li>
-)
-}
-  />
-  < Comment
-  avatar = {
-    < Avatar
-  src = "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-  alt = "Han Solo"
-    / >
-}
-  content = { commentForm() }
-  />
-  < />
-)
+    <>
+      <List
+        className="comment-list"
+        //header={ `${ data.length } replies` }
+        itemLayout="horizontal"
+        dataSource={ movieComments }
+        renderItem={ item => (
+          <li>
+            <Comment
+              //actions={item.actions}
+              //author={item.author}
+              //avatar={item.avatar}
+              content={ item.text }
+              //datetime={item.datetime}
+            />
+          </li>
+        )
+        }
+      />
+      <Comment
+        avatar={
+          <Avatar
+            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+            alt="Han Solo"
+          />
+        }
+        content={ commentForm() }
+      />
+    </>
+  )
 }
 
 export default CommentsList;

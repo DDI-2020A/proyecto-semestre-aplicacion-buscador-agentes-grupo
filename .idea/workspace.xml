@@ -21,6 +21,10 @@
   <component name="ChangeListManager">
     <list default="true" id="44425692-fff2-4f41-865b-71507a48a3b7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/comments/Agents.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/comments/Agents.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/comments/AppComments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/comments/AppComments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/comments/Comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/comments/Comments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/comments/CommentsList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/comments/CommentsList.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,10 +54,13 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../DDI_IIB/first-view" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -64,12 +71,13 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="35a2aab2-b2bf-4eb7-a23f-564d93039f77" name="Default Changelist" comment="" />
+      <changelist id="44425692-fff2-4f41-865b-71507a48a3b7" name="Default Changelist" comment="" />
       <created>1599497252709</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1599497252709</updated>
       <workItem from="1599497255617" duration="5498000" />
+      <workItem from="1600785971475" duration="1498000" />
     </task>
     <servers />
   </component>
@@ -89,6 +97,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="210" y="261" key="#ESLint" timestamp="1600787190768">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="210" y="261" key="#ESLint/0.0.1366.738@0.0.1366.738" timestamp="1600787190768" />
     <state x="413" y="115" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1599499302830">
       <screen x="0" y="0" width="1366" height="738" />
     </state>

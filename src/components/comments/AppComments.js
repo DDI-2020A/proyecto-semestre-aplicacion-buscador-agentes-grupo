@@ -22,26 +22,27 @@ function AppComments() {
     const title = document.querySelector( '#TITLE' ).value;
     setTitle( title );
   };
+
   return (
     <>
       <div className='header'>
         <PageHeader
           title='TUPELI'
-          extra={[
-            <Input id='TITLE' placeholder='Titulo' style={{width:350}}/>,
-            <Input placeholder='Año' style={{width:350}}/>,
+          extra={ [
+            <Input id='TITLE' placeholder='Titulo' style={ { width: 350 } }/>,
+            <Input placeholder='Año' style={ { width: 350 } }/>,
             <label>Tipo</label>,
-              <Radio.Group>
-              <Radio value={1}>Todo</Radio>
-                <Radio value={2}>Peliculas</Radio>
-                <Radio value={3}>Series</Radio>
-                </Radio.Group>,
-                <Button type='primary' onClick={handleResearch}>Buscar</Button>
-            ]}
-          >
+            <Radio.Group>
+              <Radio value={ 1 }>Todo</Radio>
+              <Radio value={ 2 }>Peliculas</Radio>
+              <Radio value={ 3 }>Series</Radio>
+            </Radio.Group>,
+            <Button type='primary' onClick={ handleResearch }>Buscar</Button>
+          ] }
+        >
         </PageHeader>
       </div>
-      <Agents listMovies={listMovies}/>
+      <Agents listMovies={ listMovies }/>
     </>
   );
 

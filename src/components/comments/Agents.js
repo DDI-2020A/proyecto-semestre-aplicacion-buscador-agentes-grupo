@@ -1,83 +1,82 @@
-import { Button, Card, Modal, Divider } from 'antd';
-import Meta from 'antd/es/card/Meta';
-import { Comment, Tooltip, Avatar } from 'antd';
+import React, { useEffect, useState } from 'react';
+import Button from 'antd/es/button';
+import Modal from 'antd/es/modal';
 import Descriptions from 'antd/es/descriptions';
-import React, { useState, useEffect } from 'react';
-import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined";
-import EllipsisOutlined from "@ant-design/icons/lib/icons/EllipsisOutlined";
-import Comments from "./Comments";
-import CommentsList from "./CommentsList";
-
+import Comments from './Comments';
+import CommentsList from './CommentsList';
+import Comment from "antd/es/comment";
+import Avatar from "antd/es/avatar";
+import Tooltip from "antd/es/tooltip";
+import moment from "moment";
 
 const Agents = ( props ) => {
 
-  const [ listMovies, setListMovies ] = useState( props.listMovies );
+  const [ listAgents, setListAgents ] = useState( props.listAgents );
   const [ imdbID, setImdbID ] = useState( null );
-  const [ currentMovie, setCurrentMovie ] = useState( {} );
+  const [ currentAgent, setCurrentAgent ] = useState( {} );
+  const [ AgentDetails, setAgentDetails ] = useState( {} );
   const [ createInfoModalVisible, setCreateInfoModalVisible ] = useState( false );
   const [ createCommentModalVisible, setCreateCommentsModalVisible ] = useState( false );
-  const [ movieDetails, setMovieDetails ] = useState( {} );
 
   useEffect( () => {
-    console.log( 'list movies', props.listMovies );
-    setListMovies( props.listMovies )
-  }, [ props.listMovies ] );
+    console.log( 'list Agents', props.listAgents );
+    setListAgents( props.listAgents );
+  }, [ props.listAgents ] );
 
   useEffect( () => {
-    const getMovieDetails = async() => {
+    const getAgentDetails = async() => {
       if( imdbID ) {
-        const data = await fetch( `http://www.omdbapi.com/?apikey=dba37ff3&i=${ imdbID }` );
-        const jsonMovie = await data.json();
-        setMovieDetails( jsonMovie );
+        const response = await fetch( `http://www.omdbapi.com/?apikey=135f640d&i=${ imdbID }` );
+        const AgentJson = await response.json();
+        setAgentDetails( AgentJson );
         setCreateInfoModalVisible( true );
       }
     };
-    getMovieDetails();
+
+    getAgentDetails();
   }, [ imdbID ] );
 
-  const handleOpenComments = ( movie, index ) => {
-    setCurrentMovie( {
+  const handleOpenComments = ( Agent, index ) => {
+    setCurrentAgent( {
       index,
-      data: movie
+      data: Agent
     } );
-    setCreateCommentsModalVisible( true )
+    setCreateCommentsModalVisible( true );
   };
 
   const handleAddComment = ( text ) => {
-    setListMovies( ( prevListMovies ) => {
-      const movieToAddComment = prevListMovies.Search[currentMovie.index];
+    setListAgents( ( prevListAgents ) => {
+      const AgentToAddComment = prevListAgents.Search[currentAgent.index];
 
-
-      if( movieToAddComment['comments'] ) {
-        movieToAddComment['comments'].push( 'text' );
-        // movieToAddComment['comments'] = [
-        //   ...movieToAddComment['comments'],
-        //   text
-        // ];
+      if( AgentToAddComment['comments'] ) {
+        AgentToAddComment['comments'].push( text );
       } else {
-        movieToAddComment['comments'] = [ text ];
+        AgentToAddComment['comments'] = [ text ];
       }
-      console.log( 'movieToAddComment', movieToAddComment );
 
-      //realioza una copia de PREVLISTMOVIES.SEARCH
-      const movieListUpdate = prevListMovies.Search;
-      movieListUpdate[currentMovie.index] = movieToAddComment;
+      const AgentListUpdated = prevListAgents.Search;
+      AgentListUpdated[currentAgent.index] = AgentToAddComment;
+
       return {
-        ...prevListMovies,
-        Search: movieListUpdate
-      }
+        ...prevListAgents,
+        Search: AgentListUpdated
+      };
+
     } );
   };
 
   return (
     <div>
       {
-        listMovies && listMovies.Search
-          ? listMovies.Search.map( ( item, index ) => {
+        listAgents && listAgents.Search
+          ?
+          listAgents.Search.map( ( item, index ) => {
             return (
               <Comment
-                key={ `movie-${ index }` }
-                width={ 400 }
+                key={ `Agent-${ index }` }
+                style={ {
+                  width: 1400, display: 'inline-block'
+                } }
                 author={ item.Title }
                 avatar={
                   <Avatar
@@ -88,50 +87,30 @@ const Agents = ( props ) => {
                 content={
                   <p>
                     We supply a series of design principles, practical patterns and high quality design
-                    resources (Sketch and Axure), to help people create their product prototypes beautifully
-                    and efficiently.
+                    We supply a series of design principles, practical patterns and high quality design
                   </p>
                 }
                 actions={ [
-                  <Button type='primary' onClick={ () => handleOpenComments( item, index ) }
-                          key='edit'>Comentarios</Button>,
-                  <Button icon={ <EllipsisOutlined/> } onClick={ () => setImdbID( item.imdbID ) } key='ellipsis'/>
+                  <Button type='primary'
+                          style={{marginRight:10}}
+                          onClick={ () => handleOpenComments( item, index ) }
+                          key='edit'>Ver commentarios</Button>,
+                  <Button type='primary'
+                          onClick={ () => setImdbID( item.imdbID ) }
+                          key='ellipsis'>Ver Agente</Button>
                 ] }
+                datetime={
+                  <Tooltip title={ moment().format( 'YYYY-MM-DD HH:mm:ss' ) }>
+                    <span>{ moment().fromNow() }</span>
+                  </Tooltip>
+                }
               />
-
-              // <Card
-              // key={`movie-${index}`}
-              // style={{width:350, display:'inline-block'}}
-              // cover={<img src={item.Poster} alt={item.Title}/>}
-              // actions={[
-              //   <Button icon={<EditOutlined/>} onClick={()=> handleOpenComments(item, index)} key='edit'/>,
-              //   <Button icon={<EllipsisOutlined/>} onClick={()=>setImdbID(item.imdbID)} key='ellipsis'/>
-              // ]}
-              // >
-              //   <Meta title={ item.Title } description={'Año: ' + item.Year}
-              //   />
-              // </Card>
-
-            )
+            );
           } )
-
           : 'Cargando'
       }
-      <Modal
-        title={ `Agregar comentario para ${ currentMovie.data && currentMovie.data.Title }` }
-        visible={ createCommentModalVisible }
-        onOk={ () => setCreateCommentsModalVisible( false ) }
-        onCancel={ () => setCreateCommentsModalVisible( false ) }
-        footer={ null }
-      >
-        <div>
-          <CommentsList onAddComment={ handleAddComment }
-                        movieComments={ currentMovie && currentMovie.data && currentMovie.data.comments
-                          ? currentMovie.data.comments
-                          : []
-                        }/>
-        </div>
-      </Modal>
+
+
       <Modal
         title='Informacion pelicula: '
         visible={ createInfoModalVisible }
@@ -141,17 +120,36 @@ const Agents = ( props ) => {
         footer={ null }
       >
         <Descriptions bordered>
-          <Descriptions.Item label="Publicada">{ movieDetails.Released }</Descriptions.Item>
-          <Descriptions.Item label="Duracion">{ movieDetails.Runtime }</Descriptions.Item>
-          <Descriptions.Item label="Escritor">{ movieDetails.Writer }</Descriptions.Item>
-          <Descriptions.Item label="Actores" span={ 2 }>
-            { movieDetails.Actors }
+          <Descriptions.Item label='Publicada'>{ AgentDetails.Released }</Descriptions.Item>
+          <Descriptions.Item label='Duracion'>{ AgentDetails.Runtime }</Descriptions.Item>
+          <Descriptions.Item label='Escritor'>{ AgentDetails.Writer }</Descriptions.Item>
+          <Descriptions.Item label='Actores' span={ 2 }>
+            { AgentDetails.Actors }
           </Descriptions.Item>
         </Descriptions>
         <Comments/>
       </Modal>
-    </div>
-  )
-}
 
+
+      <Modal
+        title={ `Agregar Comentarios para: ${ currentAgent.data && currentAgent.data.Title }` }
+        visible={ createCommentModalVisible }
+        onOk={ () => setCreateCommentsModalVisible( false ) }
+        onCancel={ () => setCreateCommentsModalVisible( false ) }
+        footer={ null }
+      >
+        <div>
+          <CommentsList onAddComment={ handleAddComment }
+                        AgentComments={ currentAgent && currentAgent.data && currentAgent.data.comments
+                          ? currentAgent.data.comments
+                          : [] }/>
+        </div>
+      </Modal>
+
+
+    </div>
+  );
+};
 export default Agents;
+
+

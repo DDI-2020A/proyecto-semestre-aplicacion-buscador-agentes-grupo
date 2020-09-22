@@ -1,83 +1,65 @@
 import React, { useEffect, useState } from 'react';
-import Comment from "antd/es/comment";
-import Avatar from "antd/es/avatar";
-import List from 'antd/es/list';
-import TextArea from "antd/es/input/TextArea";
-import Button from "antd/es/button";
-import Form from 'antd/lib/form/Form';
-import FormItem from 'antd/lib/form/FormItem';
+import { Form, Button, Input, Avatar, Comment, List } from 'antd';
 
-const CommentsList = ( { onAddComment, ...props } ) => {
+const { TextArea } = Input;
 
-  const [ movieComments, setMovieComments ] = useState( props.movieComments );
+const CommentsList = ( { onAddComment, AgentComments } ) => {
 
-  useEffect( () => {
-    console.log( 'movie comments', movieComments )
-    setMovieComments( props.movieComments );
-  }, [ props.movieComments ] );
-
-  const commentForm = () => (
+  const CommentForm = () => (
     <>
       <Form
-        name="Coment-form"
+        name='comment-form'
         onFinish={ onAddComment }
-        // onFinishFailed={onFinishFailed}
+        // onFinishFailed={ onFinishFailed }
       >
-        < FormItem
-          label="Comentario"
-          name="text"
-          rules={ [ { required: true, message: 'Ingresa tu comentario' } ] }
+        <Form.Item
+          label='Comentario'
+          name='text'
+          rules={ [
+            {
+              required: true,
+              message: 'Ingresa un texto en el comentario'
+            }
+          ] }
         >
-          <TextArea
-            rows={ 4 }
-          />
-        </FormItem>
-        <FormItem>
-          <Button
-            htmlType="submit"
-            type="primary"
-            style={
-              {
-                marginTop: 15
-              }
-            }>
+          <TextArea rows={ 4 }/>
+        </Form.Item>
+
+        <Form.Item>
+          <Button htmlType='submit' type='primary' style={ { marginTop: 15 } }>
             Agregar Comentario
           </Button>
-        </FormItem>
+        </Form.Item>
       </Form>
     </>
   );
+
   return (
     <>
       <List
-        className="comment-list"
-        //header={ `${ data.length } replies` }
-        itemLayout="horizontal"
-        dataSource={ movieComments }
+        className='comment-list'
+        header={ `${ AgentComments.length } comentarios` }
+        itemLayout='horizontal'
+        dataSource={ AgentComments }
         renderItem={ item => (
           <li>
             <Comment
-              //actions={item.actions}
-              //author={item.author}
-              //avatar={item.avatar}
+              // actions={item.actions}
+              // author={item.author}
+              // avatar={item.avatar}
               content={ item.text }
-              //datetime={item.datetime}
+              // datetime={item.datetime}
             />
           </li>
-        )
-        }
+        ) }
       />
-      <Comment
-        avatar={
-          <Avatar
-            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-            alt="Han Solo"
-          />
-        }
-        content={ commentForm() }
+
+      <Comment avatar={ <Avatar src='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
+                                alt='Han Solo'/> }
+               content={ CommentForm() }
       />
     </>
-  )
-}
+  );
+};
 
 export default CommentsList;

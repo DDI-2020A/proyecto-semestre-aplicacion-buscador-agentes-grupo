@@ -3,7 +3,7 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import '../app/App.css'
 import { Row, Col } from 'antd';
 
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 //redux
 import { setUserAction } from '../../redux'
 import { useDispatch, useSelector } from "react-redux";
@@ -27,7 +27,12 @@ const SignForm = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const setUser = currentUser => dispatch(setUserAction(currentUser));
-  
+    const currentUser  = useSelector(state =>  state.currentUser);
+
+    if (currentUser) {
+        return <Redirect to="/Home" />
+    }
+
     const onFinish = async values => {
         console.log('Success:', values);
         const { email, password } = values;
@@ -109,15 +114,16 @@ const SignForm = () => {
             <Form.Item {...tailLayout}>
                 <Button type="primary" htmlType="submit">
                     Submit
-        </Button>
+                </Button>
             </Form.Item>
         </Form>
+    
     );
 };
 export default function SignIn() {
     return (
         <Row className="sign-root" justify="center">
-            <Col span={8}>
+            <Col xs={22} sm={22} md={16} lg={8}>
                 <SignForm />
             </Col>
         </Row>

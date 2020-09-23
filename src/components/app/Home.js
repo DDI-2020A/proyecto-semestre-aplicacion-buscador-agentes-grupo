@@ -19,8 +19,8 @@ function Home({match}) {
             <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
                 <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
                     <Switch>
-                        <Route path={`${match.path}/properties`} component={<PropertyForm mode="create" />} />
-                        <Route path={`${match.path}/search`} component={<PropertyForm mode="create" />} />
+                        <Route path={`${match.path}/properties`} component={PropertyForm}  />
+                        <Route path={`${match.path}/search`} component={PropertyForm} />
                     </Switch>
                 </div>
             </Content>
@@ -29,4 +29,4 @@ function Home({match}) {
     )
 }
 
-export default Home;
+export default withRouter(Home);

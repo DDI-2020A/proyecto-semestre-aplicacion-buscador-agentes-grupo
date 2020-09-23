@@ -42,13 +42,13 @@ export default function NavBar() {
                 </Menu.Item>
 
                 <Menu.Item style={{ display: isHome? '':'none' }} key="4">
-                    <Link to="Home/properties">
+                    <Link to={"/Home/properties"}>
                         Propiedades
                     </Link>
                 </Menu.Item>
 
                 <Menu.Item style={{ display: isHome? '':'none' }} key="5">
-                    <Link to="Home/search">
+                    <Link to="/Home/search">
                         Buscar agentes
                     </Link>
                 </Menu.Item>

@@ -11,6 +11,7 @@ import { upload, update } from "./firebase";
 import { v4 as uuidv4 } from 'uuid';
 
 const { Option } = Select;
+const { TextArea } = Input;
 
 const layout = {
     labelCol: {
@@ -33,7 +34,7 @@ const modes = {
 }
 
 const validateMessages = {
-    required: 'Debes escribir el ${label}',
+    required: 'obligatorio',
     types: {
         email: 'correo no inválido',
         number: 'número no válido',
@@ -151,7 +152,6 @@ const Fields = ({ propData, mode }) => {
     return (
         <Form
             {...layout}
-            style={{ minWidth: 250 }}
             form={form}
             name="basic"
             initialValues={{
@@ -161,57 +161,93 @@ const Fields = ({ propData, mode }) => {
             onFinishFailed={fail}
             validateMessages={validateMessages}
         >
-            <Form.Item
-                initialValue={edit ? propData.title : ""}
-                label="Título"
-                name="title"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Título obligatorio',
-                    },
-                ]}
-            >
-                <Input />
-            </Form.Item>
-
-            <Form.Item
-                initialValue={edit ? propData.address : ""}
-                label="Dirección"
-                name="address"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Dirección obligatoria',
-                    },
-                ]}
-            >
-                <Input />
-            </Form.Item>
-
-            <Form.Item name="operation" label="Operación" rules={[{ required: true }]}>
-                <Select
-                    allowClear
-                >
-                    <Option value="Venta">Venta</Option>
-                    <Option value="Alquiler">Alquiler</Option>
-                </Select>
-            </Form.Item>
-
-            <Form.Item name="propType" label="Tipo" rules={[{ required: true }]}>
-                <Select
-                    onChange={changeType}
-                    allowClear
-                >
-                    <Option value="Casa">Casa</Option>
-                    <Option value="Terreno">Terreno</Option>
-                </Select>
-            </Form.Item>
-
-
-            {propType !== "Terreno" &&
-                <>
+            <Row gutter={24} justify="center">
+                <Col span={24} style={{ display: 'flex' }}>
+                    <h1 style={{ margin: '50px auto' }}>Publicar propiedad</h1>
+                </Col>
+            </Row>
+            <Row gutter={24}>
+                <Col span={12}>
                     <Form.Item
+                        initialValue={edit ? propData.title : ""}
+                        label="Título"
+                        name="title"
+                        rules={[
+                            {
+                                required: true,
+                            },
+                        ]}
+                    >
+                        <Input />
+                    </Form.Item>
+
+                </Col>
+
+                <Col span={12}>
+                    <Form.Item
+                        initialValue={edit ? propData.address : ""}
+                        label="Dirección"
+                        name="address"
+                        rules={[
+                            {
+                                required: true,
+                            },
+                        ]}
+                    >
+                        <Input />
+                    </Form.Item>
+                </Col>
+            </Row>
+
+            <Row gutter={24}>
+                <Col span={12}>
+                    <Form.Item name="operation" label="Operación" rules={[{ required: true }]}>
+                        <Select
+                            allowClear
+                        >
+                            <Option value="Venta">Venta</Option>
+                            <Option value="Alquiler">Alquiler</Option>
+                        </Select>
+                    </Form.Item>
+                </Col>
+                <Col span={12}>
+                    <Form.Item name="propType" label="Tipo" rules={[{ required: true }]}>
+                        <Select
+                            onChange={changeType}
+                            allowClear
+                        >
+                            <Option value="Casa">Casa</Option>
+                            <Option value="Terreno">Terreno</Option>
+                        </Select>
+                    </Form.Item>
+                </Col>
+            </Row>
+
+            <Row gutter={24}>
+                <Col span={24}>
+                    <Form.Item
+                        initialValue={edit ? propData.description : ""}
+                        label="Descripción"
+                        name="description"
+                        labelCol={{span: 6}}
+                        rules={[
+                        {
+                            required: true,
+                        },
+                    ]}
+                    >
+                        <TextArea allowClear />
+                    </Form.Item>
+                </Col>
+            </Row>
+
+            {
+        propType !== "Terreno" &&
+        <>
+            <Row gutter={24}>
+                <Col span={12}>
+                    <Form.Item
+                        span={6}
                         initialValue={edit ? propData.bathrooms : ""}
                         name={'bathrooms'}
                         label="Baños"
@@ -223,14 +259,15 @@ const Fields = ({ propData, mode }) => {
                             },
                             {
                                 required: true,
-                                message: 'obligatorio',
                             },
                         ]}
                     >
-                        <InputNumber />
+                        <InputNumber style={{ width: '100%' }} />
                     </Form.Item>
-
+                </Col>
+                <Col span={12}>
                     <Form.Item
+                        span={6}
                         label="Parqueaderos"
                         name="parkings"
                         rules={[
@@ -241,14 +278,17 @@ const Fields = ({ propData, mode }) => {
                             },
                             {
                                 required: true,
-                                message: 'obligatorio',
                             },
                         ]}
                     >
-                        <InputNumber />
+                        <InputNumber style={{ width: '100%' }} />
                     </Form.Item>
-
+                </Col>
+            </Row>
+            <Row gutter={24}>
+                <Col span={12}>
                     <Form.Item
+                        span={6}
                         label="Dormitorios"
                         name="dormitories"
                         rules={[
@@ -259,71 +299,85 @@ const Fields = ({ propData, mode }) => {
                             },
                             {
                                 required: true,
-                                message: 'obligatorio',
                             },
                         ]}
                     >
-                        <InputNumber />
+                        <InputNumber style={{ width: '100%' }} />
                     </Form.Item>
-                </>
-            }
+                </Col>
+                <Col span={12}>
+                    <Form.Item
+                        span={6}
+                        label="Area"
+                        name="area"
+                        rules={[
+                            {
+                                type: 'number',
+                                min: 0,
+                                max: 10000,
+                            },
+                            {
+                                required: true,
+                            },
+                        ]}
+                    >
+                        <InputNumber style={{ width: '100%' }} />
+                    </Form.Item>
 
-            <Form.Item
-                label="Area"
-                name="area"
-                rules={[
-                    {
-                        type: 'number',
-                        min: 0,
-                        max: 10000,
-                    },
-                    {
-                        required: true,
-                        message: 'obligatorio',
-                    },
-                ]}
-            >
-                <InputNumber />
-            </Form.Item>
+                </Col>
+            </Row>
+        </>
+    }
+            <Row gutter={24}>
+                <Col span={12}>
+                    <Form.Item
+                        span={6}
+                        name={'comission'}
+                        label="Comisión (%)"
+                        rules={[
+                            {
+                                type: 'number',
+                                min: 0,
+                                max: 99,
+                            },
+                            {
+                                required: true,
+                            },
+                        ]}
+                    >
+                        <InputNumber style={{ width: '100%' }} />
+                    </Form.Item>
+                </Col>
 
-            <Form.Item>
-                <PicturesPicker />
-            </Form.Item>
+                <Col span={12}>
+                    <Form.Item
+                        span={6}
+                        name={'price'}
+                        label="Precio ($)"
+                        rules={[
+                            {
+                                type: 'number',
+                                min: 0,
+                            },
+                            {
+                                required: true,
+                            },
+                        ]}
+                    >
+                        <InputNumber style={{ width: '100%' }} />
+                    </Form.Item>
 
-            <Form.Item
-                name={'comission'}
-                label="Comisión (%)"
-                rules={[
-                    {
-                        type: 'number',
-                        min: 0,
-                        max: 99,
-                    },
-                    {
-                        required: true,
-                        message: 'obligatorio',
-                    },
-                ]}
-            >
-                <InputNumber />
-            </Form.Item>
-
-            <Form.Item
-                name={'price'}
-                label="Precio ($)"
-                rules={[
-                    {
-                        type: 'number',
-                        min: 0,
-                    },
-                    {
-                        required: true,
-                        message: 'obligatorio',
-                    },
-                ]}
-            >
-                <InputNumber />
-            </Form.Item>
+                </Col>
+            </Row>
+            <Row gutter={24} justify='center'>
+                <Col style={{ display: 'flex' }} span={20}>
+                    <Form.Item
+                        style={{ margin: '0px auto' }}
+                    >
+                        <PicturesPicker />
+                    </Form.Item>
+                </Col>
+            </Row>
 
             <Form.Item {...tailLayout}>
                 <Button
@@ -336,7 +390,7 @@ const Fields = ({ propData, mode }) => {
                 </Button>
             </Form.Item>
 
-        </Form>
+        </Form >
 
     );
 }
@@ -345,8 +399,8 @@ const root = {
 }
 const PropertyForm = ({ propData, mode }) => {
     return (
-        <Row style={root} justify="center">
-            <Col xs={22} sm={18} md={18} lg={18}>
+        <Row style={root}>
+            <Col xs={22} sm={24} md={24} lg={24}>
                 <Fields propData={propData} mode={mode} />
             </Col>
         </Row>

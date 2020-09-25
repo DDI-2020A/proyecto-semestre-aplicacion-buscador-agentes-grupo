@@ -6,10 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 const PicturesPicker = () => {
   const dispatch = useDispatch();
-  const {files} = useSelector(state => state);
+  const { files } = useSelector(state => state);
 
   const setFiles = files => dispatch({ type: "LOAD_FILES", payload: files });
-  const setUploading = uploading => dispatch({type:'UPLOADING',payload:uploading});
+  const setUploading = uploading => dispatch({ type: 'UPLOADING', payload: uploading });
 
   const remove = file => {
     setFiles(
@@ -28,22 +28,17 @@ const PicturesPicker = () => {
   };
 
   const root = {
-    display:'flex',
-    width:'100%'
+    minWidth:50
   }
 
   const content = {
-    margin:'0 auto'
+    margin: '0 auto'
   }
 
   return (
-    <div style={root}>
-      <div style={content}>
-        <Upload {...props}>
-          <Button icon={<UploadOutlined />}>Fotos</Button>
-        </Upload>
-      </div>
-    </div>
+    <Upload {...props}>
+      <Button style={root} icon={<UploadOutlined />}></Button>
+    </Upload>
   );
 }
 export default PicturesPicker;

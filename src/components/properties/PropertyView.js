@@ -9,13 +9,13 @@ export default function News() {
 
   useEffect(() => {
     const init = async () => {
-      const result = await db.collection('props').orderBy("date","desc").get();
+      const result = await db.collection('props').orderBy("date", "desc").get();
       const docs = result.docs.map(
         doc => {
           return doc.data();
         }
       );
-      console.log('properties',docs)
+      console.log('properties', docs)
       setProperties(docs);
     }
     init();
@@ -40,11 +40,8 @@ export default function News() {
   return (
     <div >
       <Row justify="center">
-        <Col xs={22} sm={22} md={10} lg={10}>
-          <PropertyForm/>
-        </Col>
-        <Col xs={22} sm={22} md={10} lg={10}>
-          <ProperyList properties={properties} />
+        <Col xs={22} sm={22} md={22} lg={10}>
+          <PropertyForm />
         </Col>
       </Row>
     </div>

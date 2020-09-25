@@ -2,11 +2,27 @@ import React, { useState } from 'react'
 import { Table, Space, Avatar, Modal } from 'antd';
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Row, Col } from 'antd';
 
 import { faComment } from "@fortawesome/free-solid-svg-icons";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 
 import Comments from './Comments';
+
+const Counter = ({length}) => {
+
+    const placeholder = { color: 'gray'};
+
+    return (
+        <Row style={{padding:'6px 0px'}} gutter={24} justify="center">
+            <Col style={{textAlign:'center'}} span={12}>
+                <span style={placeholder}>Resultados {length}</span>
+            </Col>
+        </Row>
+    )
+}
+
+
 
 const Action = ({ icon, color }) => {
     const root = {
@@ -97,8 +113,10 @@ export default function UserResults({ users }) {
         console.log(e);
         setVisible(false);
     };
+
     return (
         <>
+            <Counter length={users.length}/>
             <Table columns={columns} dataSource={users} />
             {selected &&
                 <Modal

@@ -11,8 +11,8 @@ const img = { width: '100%', heigh: '100%' };
 export default function NavBar() {
     const location = useLocation();
     const isRoot = location.pathname == "/";
-    const isHome  = location.pathname.includes("Home");
-        
+    const isHome = location.pathname.includes("Home");
+
     useEffect(() => {
         console.log("path", location.pathname);
     }, []);
@@ -49,38 +49,42 @@ export default function NavBar() {
                     </Link>
                 </Menu.Item>
 
-                <Menu.Item style={{ display: isRoot? '':'none' }} key="2">
+                <Menu.Item style={{ display: isHome ? '' : 'none' }} key="2">
+                    <Link to="/Home/mypanel">
+                        Mi panel
+                    </Link>
+                </Menu.Item>
+
+
+                <Menu.Item style={{ display: isRoot ? '' : 'none' }} key="3">
                     <Link to="/signup">
                         Registrarse
                     </Link>
                 </Menu.Item>
 
-                <Menu.Item style={{ display: isRoot? '':'none' }} key="3">
+                <Menu.Item style={{ display: isRoot ? '' : 'none' }} key="4">
                     <Link to="/signin">
                         Iniciar Sesión
                         </Link>
                 </Menu.Item>
 
-                <Menu.Item style={{ display: isHome? '':'none' }} key="4">
+                <Menu.Item style={{ display: isHome ? '' : 'none' }} key="5">
                     <Link to={"/Home/properties"}>
-                        Mis Propiedades
+                        Publicar
                     </Link>
                 </Menu.Item>
 
-                <Menu.Item style={{ display: isHome? '':'none' }} key="5">
+                <Menu.Item style={{ display: isHome ? '' : 'none' }} key="6">
                     <Link to="/Home/search">
                         Buscar agentes
                     </Link>
                 </Menu.Item>
 
-
-                <Menu.Item style={{ display: isHome? '':'none' }} key="6">
+                <Menu.Item style={{ display: isHome ? '' : 'none' }} key="7">
                     <a onClick={signOut}>
                         Salir
                     </a>
                 </Menu.Item>
-
-
 
             </Menu>
         </Header>

@@ -1,17 +1,21 @@
 import React from 'react'
 import { StarOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
-
+import { Col, Row } from 'antd';
 import { HomeOutlined, AimOutlined, ContainerOutlined } from '@ant-design/icons';
 import { List, Space } from 'antd';
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { db } from '../../utils/firebase_sdk.js';
 
 const Detail = ({ detail, icon, stretch }) => {
-  const rootStyle = stretch ? { display: 'flex', flexDirection: 'row', paddingTop: '3px', alignItems: 'flex-start' } :
+  const rootStyle = stretch ? { flexDirection: 'row', paddingTop: '0px', alignItems: 'flex-start' } :
     {
+      padding: '6px 6px',
       width: '87px',
       display: 'flex'
     };
 
-  const descriptionStyle = { fontSize: '14px', padding: '2px 6px' };
+  const descriptionStyle = { fontSize: '14px', padding: '0px 6px' };
   const iconStyle = { color: 'gray' };
 
   const styledIcon = React.cloneElement(
@@ -35,6 +39,11 @@ const root = {
   margin: '20px 0px',
   overflowWrap: 'anywhere',
 }
+
+const remove = async (id) => {
+   await db.collection('props').doc(id).delete();
+}
+
 function Details(props) {
 
   const data = props.propData ? props.propData : null;
@@ -49,14 +58,21 @@ function Details(props) {
         width: '100%'
       }}>
 
-        <Detail stretch={false} detail={data.propType} icon={<HomeOutlined />} />
-        <Detail stretch={false} detail={data.operation} icon={<ContainerOutlined />} />
+        <Detail stretch={true} detail={data.propType} icon={<HomeOutlined />} />
+        <Detail stretch={true} detail={data.operation} icon={<ContainerOutlined />} />
       </div>
 
       {data.description && <span style={{ margin: '20px 0' }} >
         {data.description}
       </span>
       }
+      <a onClick={() => remove(props.propData.id)}>
+        <Row style={{ margin: '10px 0px' }} gutter={24}>
+          <Col span={10}>
+            <FontAwesomeIcon style={{ color: 'red', fontSize: '30px' }} icon={faTrash} />
+          </Col>
+        </Row>
+      </a>
 
     </div>
 
@@ -72,6 +88,8 @@ const IconText = ({ icon, text }) => (
 );
 export default function PropertyItem({ item }) {
 
+  const wrapper = { width: 272, height: 153 }
+  const img = { width: '100%', height: '100%' }
   return (
     <List.Item
       onClick={() => console.log('clicked')}
@@ -81,11 +99,13 @@ export default function PropertyItem({ item }) {
       // ]}
       extra={
         item.photos.length != 0 &&
-        <img
-          width={272}
-          alt="logo"
-          src={item.photos[0]}
-        />
+        <div style={wrapper}>
+          <img
+            style={img}
+            alt="logo"
+            src={item.photos[0]}
+          />
+        </div>
       }
     >
       <List.Item.Meta

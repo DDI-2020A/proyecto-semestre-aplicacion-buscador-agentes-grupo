@@ -84,7 +84,7 @@ export default function SearchInput({ action }) {
                         <Button disabled={loading} type="primary" htmlType="submit">
                             Buscar
                         </Button>
-                        <span style={{ color: 'gray', margin: '0 6px' }}>o presione Enter</span>
+                        <span style={{ color: 'gray', margin: '0 6px' }}>o presionar Enter</span>
                     </Form.Item>
                 </Form>
             </Col>

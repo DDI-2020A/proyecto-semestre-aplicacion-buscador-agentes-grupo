@@ -6,7 +6,7 @@ export default function Panel() {
     return (
 
         <Row justify="center">
-            <Col xs={22} sm={22} md={22} lg={10}>
+            <Col xs={22} sm={22} md={22} lg={22}>
                 <PropertyView />
             </Col>
         </Row>

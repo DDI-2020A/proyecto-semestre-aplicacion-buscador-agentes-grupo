@@ -27,6 +27,8 @@ function Home({match}) {
                         <Route path={`${match.path}/publish`} component={PropertyForm}  />
                         <Route path={`${match.path}/panel`} component={Panel} />
                         <Route path={`${match.path}/search`} component={UserSearch} />
+                        <Route component={Panel} />
+
                         {/* <Route path={`${match.path}/comments`} component={UserSearch} /> */}
                         {/* <Route path={`${match.path}/properties`} component={UserSearch} /> */}
                     </Switch>

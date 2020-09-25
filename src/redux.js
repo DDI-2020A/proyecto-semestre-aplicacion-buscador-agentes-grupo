@@ -4,6 +4,9 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 const initialState = {
   loading: true,
+  files: [],
+  uploading: false,
+  properties: []
 };
 
 // reducer
@@ -26,6 +29,22 @@ const reducer = (state = initialState, action) => {
         loading: false,
         userData: action.payload
       }
+    //properties
+    case 'LOAD_FILES':
+      return {
+        ...state,
+        files: action.payload
+      }
+    case 'UPLOADING':
+      return {
+        ...state,
+        uploading: action.payload
+      }
+    case 'LOAD_PROPS':
+      return {
+        ...state,
+        properties: action.payload
+      }
     default:
       return state;
   }
@@ -34,11 +53,11 @@ const reducer = (state = initialState, action) => {
 export const fetchUserDataThunk = (uid) => {
 
   return async (dispatch) => {
-    const {db} = await import('./utils/firebase_sdk');
-    
+    const { db } = await import('./utils/firebase_sdk');
+
     const userDoc = await db.collection('users').doc(uid).get();
     dispatch(setUserData(userDoc.data()));
-      
+
   }
 }
 export const setUserAction = (currentUser) => { return { type: 'SET_USER', payload: currentUser } }

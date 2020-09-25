@@ -38,6 +38,7 @@ const LandingPage = () => {
               </>
             }
           ></PageHeader>
+        
         </Header>
 
         <Content className='section-carousel'>

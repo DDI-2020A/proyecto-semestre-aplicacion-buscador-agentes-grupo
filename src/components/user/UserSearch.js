@@ -27,34 +27,9 @@ const UserSearch = () => {
 
     }, [])
 
-
-    const showModal = () => {
-        setVisible(true);
-    };
-
-    const handleOk = e => {
-        console.log(e);
-        setVisible(false);
-    };
-
-    const handleCancel = e => {
-        console.log(e);
-        setVisible(false);
-    };
-
     return (
         <div>
             <UserResults users={profiles}/> 
-            <Modal
-                title="Comentarios de "
-                visible={visible}
-                onOk={handleOk}
-                onCancel={handleCancel}
-            >
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-            </Modal>
         </div>
     )
 }

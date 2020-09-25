@@ -17,6 +17,26 @@ export default function NavBar() {
         console.log("path", location.pathname);
     }, []);
 
+    const signOut = () => {
+        //cierra dropdown del avatar
+
+        import('../../utils/firebase_sdk')
+            .then(async ({ app }) => {
+                app.auth()
+                    .signOut()
+                    .catch(function (error) {
+                        // Handle Errors here.
+
+                        // ...
+
+                        console.log('error: ' + error)
+                    });
+            })
+            .catch(err => {
+                // Handle failure
+            });
+    }
+
     return (
         <Header style={header}>
             <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
@@ -43,7 +63,7 @@ export default function NavBar() {
 
                 <Menu.Item style={{ display: isHome? '':'none' }} key="4">
                     <Link to={"/Home/properties"}>
-                        Propiedades
+                        Mis Propiedades
                     </Link>
                 </Menu.Item>
 
@@ -52,6 +72,14 @@ export default function NavBar() {
                         Buscar agentes
                     </Link>
                 </Menu.Item>
+
+
+                <Menu.Item style={{ display: isHome? '':'none' }} key="6">
+                    <a onClick={signOut}>
+                        Salir
+                    </a>
+                </Menu.Item>
+
 
 
             </Menu>

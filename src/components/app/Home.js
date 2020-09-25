@@ -1,6 +1,7 @@
 import React from 'react'
 import { Layout, Menu, Breadcrumb } from 'antd';
 import PropertyForm from '../properties/PropertyForm';
+import PropertyView from '../properties/PropertyView';
 
 /*ENRUTAMIENTO*/
 import {
@@ -13,13 +14,16 @@ import {
 
 const { Header, Content, Footer } = Layout;
 
+const root = {
+    minHeight:'100vh'
+}
 function Home({match}) {
     return (
-        <Layout>
+        <Layout style={root}>
             <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
                 <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
                     <Switch>
-                        <Route path={`${match.path}/properties`} component={PropertyForm}  />
+                        <Route path={`${match.path}/properties`} component={PropertyView}  />
                         <Route path={`${match.path}/search`} component={PropertyForm} />
                     </Switch>
                 </div>

@@ -7,16 +7,17 @@ import PicturesPicker from '../properties/PicturesPicker'
 //redux
 import { useSelector, useDispatch } from "react-redux";
 //firebase
-import { upload, create, update } from "./firebase";
+import { upload, update } from "./firebase";
+import { v4 as uuidv4 } from 'uuid';
 
 const { Option } = Select;
 
 const layout = {
     labelCol: {
-        span: 8,
+        span: 12,
     },
     wrapperCol: {
-        span: 16,
+        span: 18,
     },
 };
 const tailLayout = {
@@ -31,7 +32,20 @@ const modes = {
     CREATE: 'create'
 }
 
+const validateMessages = {
+    required: 'Debes escribir el ${label}',
+    types: {
+        email: 'correo no inválido',
+        number: 'número no válido',
+    },
+    number: {
+        range: '${label} debe ser mayor que ${min} y menor que ${max}',
+    },
+};
+
+
 const Fields = ({ propData, mode }) => {
+    const [form] = Form.useForm();
     const dispatch = useDispatch();
     const edit = mode == modes.EDIT;
     const { currentUser, files, uploading } = useSelector(state => state);
@@ -44,56 +58,85 @@ const Fields = ({ propData, mode }) => {
             message.warning('Debes agregar almenos una foto.');
             return;
         }
+        const { db, firebase } = await import('../../utils/firebase_sdk')
+        let ref = db.collection('props');
+        const uid = currentUser.uid;
+        //create firestore doc
 
-        switch (mode) {
-            case modes.CREATE:
-                //create firestore doc
-                create({ ...values, uid: currentUser.uid });
+        ref = ref.doc()
+        const id = ref.id
+        const property = { ...values, id, photos: [], uid, date: firebase.firestore.Timestamp.fromDate(new Date()) };
 
-                //upload to storage
-                setUploading(true);
+        ref.set(property, { merge: true });
 
-                files.forEach(
-                    async file => {
-                        try {
-                            await upload(file);
+        ///
+        console.log('ref :', ref);
+        //upload to storage
+        setUploading(true);
+
+        files.forEach(
+            async file => {
+                const { storage } = await import('../../utils/firebase_sdk');
+                const metadata = {
+                    contentType: 'image/jpeg'
+                }
+                const storageRef = storage.ref();
+                const imgFile = storageRef.child(`props/${uid}/${id}/${uuidv4()}`);
+                console.log('uploading');
+                const task = imgFile.put(file, metadata);
+
+                //update progress bar
+                const unsuscribe = task.on('state_changed',
+                    function error(err) {
+                        console.log('error:', err)
+                    },
+                    async function complete(err) {
+                        message.success('Foto subida');
+
+                        console.log('completed');
+                        //unsuscribe
+                        unsuscribe();
+
+                        // Upload completed successfully, now we can get the download URL
+                        task.snapshot.ref.getDownloadURL().then(async (downloadURL) => {
+                            const { firebase } = await import('../../utils/firebase_sdk');
+
+                            //update photos atribute (array) of the prop doc
+                            await ref.set({
+                                photos: firebase.firestore.FieldValue.arrayUnion(downloadURL)
+                            }, { merge: true });
                             message.success('Foto subida');
-                        } catch (e) {
-                            message.error('Error');
-                            return;
-                        }
-                    }
+                        });
+
+                    },
                 );
+            }
+        );
 
-                setUploading(false);
-                break;
-            case modes.EDIT:
+        setUploading(false);
 
-                //create firestore doc
-                update({ ...values, uid: currentUser.uid });
+        //update firestore doc
+        // await update({ ...values, uid: currentUser.uid });
 
-                //upload to storage
-                setUploading(true);
+        //upload to storage
+        // setUploading(true);
 
-                files.forEach(
-                    async file => {
-                        try {
-                            await upload(file);
-                            message.success('Foto subida');
-                        } catch (e) {
-                            message.error('Error');
-                            return;
-                        }
-                    }
-                );
+        // files.forEach(
+        //     async file => {
+        //         try {
+        //             await upload(file);
+        //             message.success('Foto subida');
+        //         } catch (e) {
+        //             message.error('Error');
+        //             return;
+        //         }
+        //     }
+        // );
 
-                setUploading(false);
+        // setUploading(false);
 
-                break;
 
-            default:
-                break;
-        }
+        form.resetFields();
     };
 
 
@@ -108,12 +151,15 @@ const Fields = ({ propData, mode }) => {
     return (
         <Form
             {...layout}
+            style={{ minWidth: 250 }}
+            form={form}
             name="basic"
             initialValues={{
                 remember: true,
             }}
             onFinish={submit}
             onFinishFailed={fail}
+            validateMessages={validateMessages}
         >
             <Form.Item
                 initialValue={edit ? propData.title : ""}
@@ -129,9 +175,22 @@ const Fields = ({ propData, mode }) => {
                 <Input />
             </Form.Item>
 
+            <Form.Item
+                initialValue={edit ? propData.address : ""}
+                label="Dirección"
+                name="address"
+                rules={[
+                    {
+                        required: true,
+                        message: 'Dirección obligatoria',
+                    },
+                ]}
+            >
+                <Input />
+            </Form.Item>
+
             <Form.Item name="operation" label="Operación" rules={[{ required: true }]}>
                 <Select
-                    placeholder="Select a option and change input text above"
                     allowClear
                 >
                     <Option value="Venta">Venta</Option>
@@ -141,7 +200,6 @@ const Fields = ({ propData, mode }) => {
 
             <Form.Item name="propType" label="Tipo" rules={[{ required: true }]}>
                 <Select
-                    placeholder="Select a option and change input text above"
                     onChange={changeType}
                     allowClear
                 >
@@ -161,7 +219,11 @@ const Fields = ({ propData, mode }) => {
                             {
                                 type: 'number',
                                 min: 0,
-                                max: 99,
+                                max: 20,
+                            },
+                            {
+                                required: true,
+                                message: 'obligatorio',
                             },
                         ]}
                     >
@@ -175,7 +237,11 @@ const Fields = ({ propData, mode }) => {
                             {
                                 type: 'number',
                                 min: 0,
-                                max: 99,
+                                max: 20,
+                            },
+                            {
+                                required: true,
+                                message: 'obligatorio',
                             },
                         ]}
                     >
@@ -191,6 +257,10 @@ const Fields = ({ propData, mode }) => {
                                 min: 0,
                                 max: 99,
                             },
+                            {
+                                required: true,
+                                message: 'obligatorio',
+                            },
                         ]}
                     >
                         <InputNumber />
@@ -205,7 +275,11 @@ const Fields = ({ propData, mode }) => {
                     {
                         type: 'number',
                         min: 0,
-                        max: 99,
+                        max: 10000,
+                    },
+                    {
+                        required: true,
+                        message: 'obligatorio',
                     },
                 ]}
             >
@@ -225,6 +299,10 @@ const Fields = ({ propData, mode }) => {
                         min: 0,
                         max: 99,
                     },
+                    {
+                        required: true,
+                        message: 'obligatorio',
+                    },
                 ]}
             >
                 <InputNumber />
@@ -237,6 +315,10 @@ const Fields = ({ propData, mode }) => {
                     {
                         type: 'number',
                         min: 0,
+                    },
+                    {
+                        required: true,
+                        message: 'obligatorio',
                     },
                 ]}
             >
@@ -259,12 +341,12 @@ const Fields = ({ propData, mode }) => {
     );
 }
 const root = {
-    minHeight:'100vh',
+    minHeight: '100vh',
 }
 const PropertyForm = ({ propData, mode }) => {
     return (
         <Row style={root} justify="center">
-            <Col xs={22} sm={8} md={8} lg={8}>
+            <Col xs={22} sm={18} md={18} lg={18}>
                 <Fields propData={propData} mode={mode} />
             </Col>
         </Row>

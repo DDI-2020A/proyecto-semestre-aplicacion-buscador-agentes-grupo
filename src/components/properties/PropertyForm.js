@@ -77,7 +77,7 @@ const Fields = ({ propData, mode }) => {
         setUploading(true);
 
         files.forEach(
-            async (file,index) => {
+            async (file, index) => {
                 const { storage } = await import('../../utils/firebase_sdk');
                 const metadata = {
                     contentType: 'image/jpeg'
@@ -108,9 +108,9 @@ const Fields = ({ propData, mode }) => {
                             await ref.set({
                                 photos: firebase.firestore.FieldValue.arrayUnion(downloadURL)
                             }, { merge: true });
-                            
+
                             //last file uploaded succesfully
-                            if(index == files.length-1){
+                            if (index == files.length - 1) {
                                 message.success('Publicado correctamente');
                                 loadFiles([]);
                             }
@@ -143,7 +143,7 @@ const Fields = ({ propData, mode }) => {
 
         // setUploading(false);
 
-        
+
         form.resetFields();
     };
 
@@ -406,9 +406,13 @@ const root = {
 }
 const PropertyForm = ({ propData, mode }) => {
     return (
-        <Row style={root}>
-            <Col xs={22} sm={24} md={24} lg={24}>
-                <Fields propData={propData} mode={mode} />
+        <Row justify="center">
+            <Col xs={22} sm={22} md={22} lg={10}>
+                <Row style={root}>
+                    <Col xs={22} sm={24} md={24} lg={24}>
+                        <Fields propData={propData} mode={mode} />
+                    </Col>
+                </Row>
             </Col>
         </Row>
     );

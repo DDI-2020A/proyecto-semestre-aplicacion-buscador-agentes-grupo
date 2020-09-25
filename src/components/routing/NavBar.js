@@ -50,8 +50,8 @@ export default function NavBar() {
                 </Menu.Item>
 
                 <Menu.Item style={{ display: isHome ? '' : 'none' }} key="2">
-                    <Link to="/Home/mypanel">
-                        Mi panel
+                    <Link to="/Home/panel">
+                        Mi Panel
                     </Link>
                 </Menu.Item>
 
@@ -69,7 +69,7 @@ export default function NavBar() {
                 </Menu.Item>
 
                 <Menu.Item style={{ display: isHome ? '' : 'none' }} key="5">
-                    <Link to={"/Home/properties"}>
+                    <Link to={"/Home/publish"}>
                         Publicar
                     </Link>
                 </Menu.Item>

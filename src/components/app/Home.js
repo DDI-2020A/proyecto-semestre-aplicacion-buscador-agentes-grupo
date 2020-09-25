@@ -1,7 +1,7 @@
 import React from 'react'
 import { Layout, Menu, Breadcrumb } from 'antd';
 import PropertyForm from '../properties/PropertyForm';
-import PropertyView from '../properties/PropertyView';
+import Panel from '../panel/Panel';
 
 /*ENRUTAMIENTO*/
 import {
@@ -23,7 +23,8 @@ function Home({match}) {
             <Content className="site-layout" style={{paddingTop: 64 }}>
                 <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
                     <Switch>
-                        <Route path={`${match.path}/properties`} component={PropertyView}  />
+                        <Route path={`${match.path}/publish`} component={PropertyForm}  />
+                        <Route path={`${match.path}/panel`} component={Panel} />
                         <Route path={`${match.path}/search`} component={PropertyForm} />
                     </Switch>
                 </div>

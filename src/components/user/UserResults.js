@@ -96,9 +96,6 @@ export default function UserResults({ users }) {
                     }}>
                         <Action icon={faComment}></Action>
                     </a>
-                    <a>
-                        <Action icon={faHome} color='purple'></Action>
-                    </a>
                 </Space>
             ),
         },
@@ -120,7 +117,7 @@ export default function UserResults({ users }) {
             <Table columns={columns} dataSource={users} />
             {selected &&
                 <Modal
-                    title={`Comentarios de ${selected.name}`}
+                    titple={`Comentarios de ${selected.name}`}
                     visible={visible}
                     onOk={handleOk}
                     onCancel={handleCancel}

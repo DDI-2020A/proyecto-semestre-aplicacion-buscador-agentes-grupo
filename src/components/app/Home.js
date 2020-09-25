@@ -32,7 +32,7 @@ function Home({match}) {
                     </Switch>
                 </div>
             </Content>
-            <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+            <Footer style={{ textAlign: 'center' }}> Realty Key ©2020 Created by Home & Inmobiliaria</Footer>
         </Layout>
     )
 }

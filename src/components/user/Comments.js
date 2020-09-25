@@ -43,7 +43,7 @@ export default function Comments({ uid }) {
         () => {
             fetch();
         }
-        , []
+        , [uid]
     )
     return (
         <List

@@ -14,11 +14,6 @@ export default function PropertyList({properties}) {
             pageSize: 3,
         }}
         dataSource={properties}
-        footer={
-            <div>
-                <b>ant design</b> footer part
-                </div>
-        }
         renderItem={item => <PropetyItem item={item}/>}
     />
     );

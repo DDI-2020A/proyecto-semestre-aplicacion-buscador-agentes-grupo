@@ -70,7 +70,7 @@ export default function SearchInput({ action }) {
                 >
 
                     <Form.Item
-                        label="Nombre de agente"
+                        label="Nombre"
                         name="name"
                         rules={[
                             { min: 3, message: 'Mínimo 3 caracteres' },

@@ -5,7 +5,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 const initialState = {
   loading: true,
   files: [],
-  uploading: false
+  uploading: false,
+  properties: []
 };
 
 // reducer
@@ -38,6 +39,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         uploading: action.payload
+      }
+    case 'LOAD_PROPS':
+      return {
+        ...state,
+        properties: action.payload
       }
     default:
       return state;

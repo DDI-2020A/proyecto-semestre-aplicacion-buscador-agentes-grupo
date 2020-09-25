@@ -19,4 +19,4 @@ const app = firebase.initializeApp(
 const db = firebase.firestore();
 const storage = firebase.storage();
 
-export {app,db,storage};
+export {app,db,storage,firebase};

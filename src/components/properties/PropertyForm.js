@@ -52,6 +52,7 @@ const Fields = ({ propData, mode }) => {
     const { currentUser, files, uploading } = useSelector(state => state);
     const [propType, setType] = useState(edit ? propData.propType : "Casa");
 
+    const loadFiles = files => dispatch({ type: 'LOAD_FILES', payload: files });
     const setUploading = uploading => dispatch({ type: 'UPLOADING', payload: uploading });
 
     const submit = async values => {
@@ -76,7 +77,7 @@ const Fields = ({ propData, mode }) => {
         setUploading(true);
 
         files.forEach(
-            async file => {
+            async (file,index) => {
                 const { storage } = await import('../../utils/firebase_sdk');
                 const metadata = {
                     contentType: 'image/jpeg'
@@ -88,12 +89,13 @@ const Fields = ({ propData, mode }) => {
 
                 //update progress bar
                 const unsuscribe = task.on('state_changed',
+                    function progress() {
+
+                    },
                     function error(err) {
                         console.log('error:', err)
                     },
-                    async function complete(err) {
-                        message.success('Foto subida');
-
+                    async function complete() {
                         console.log('completed');
                         //unsuscribe
                         unsuscribe();
@@ -106,14 +108,19 @@ const Fields = ({ propData, mode }) => {
                             await ref.set({
                                 photos: firebase.firestore.FieldValue.arrayUnion(downloadURL)
                             }, { merge: true });
-                            message.success('Foto subida');
+                            
+                            //last file uploaded succesfully
+                            if(index == files.length-1){
+                                message.success('Publicado correctamente');
+                                loadFiles([]);
+                            }
                         });
 
                     },
                 );
             }
         );
-
+        message.success('Fotos subidas');
         setUploading(false);
 
         //update firestore doc
@@ -136,7 +143,7 @@ const Fields = ({ propData, mode }) => {
 
         // setUploading(false);
 
-
+        
         form.resetFields();
     };
 
@@ -229,12 +236,12 @@ const Fields = ({ propData, mode }) => {
                         initialValue={edit ? propData.description : ""}
                         label="Descripción"
                         name="description"
-                        labelCol={{span: 6}}
+                        labelCol={{ span: 6 }}
                         rules={[
-                        {
-                            required: true,
-                        },
-                    ]}
+                            {
+                                required: true,
+                            },
+                        ]}
                     >
                         <TextArea allowClear />
                     </Form.Item>
@@ -242,92 +249,92 @@ const Fields = ({ propData, mode }) => {
             </Row>
 
             {
-        propType !== "Terreno" &&
-        <>
-            <Row gutter={24}>
-                <Col span={12}>
-                    <Form.Item
-                        span={6}
-                        initialValue={edit ? propData.bathrooms : ""}
-                        name={'bathrooms'}
-                        label="Baños"
-                        rules={[
-                            {
-                                type: 'number',
-                                min: 0,
-                                max: 20,
-                            },
-                            {
-                                required: true,
-                            },
-                        ]}
-                    >
-                        <InputNumber style={{ width: '100%' }} />
-                    </Form.Item>
-                </Col>
-                <Col span={12}>
-                    <Form.Item
-                        span={6}
-                        label="Parqueaderos"
-                        name="parkings"
-                        rules={[
-                            {
-                                type: 'number',
-                                min: 0,
-                                max: 20,
-                            },
-                            {
-                                required: true,
-                            },
-                        ]}
-                    >
-                        <InputNumber style={{ width: '100%' }} />
-                    </Form.Item>
-                </Col>
-            </Row>
-            <Row gutter={24}>
-                <Col span={12}>
-                    <Form.Item
-                        span={6}
-                        label="Dormitorios"
-                        name="dormitories"
-                        rules={[
-                            {
-                                type: 'number',
-                                min: 0,
-                                max: 99,
-                            },
-                            {
-                                required: true,
-                            },
-                        ]}
-                    >
-                        <InputNumber style={{ width: '100%' }} />
-                    </Form.Item>
-                </Col>
-                <Col span={12}>
-                    <Form.Item
-                        span={6}
-                        label="Area"
-                        name="area"
-                        rules={[
-                            {
-                                type: 'number',
-                                min: 0,
-                                max: 10000,
-                            },
-                            {
-                                required: true,
-                            },
-                        ]}
-                    >
-                        <InputNumber style={{ width: '100%' }} />
-                    </Form.Item>
+                propType !== "Terreno" &&
+                <>
+                    <Row gutter={24}>
+                        <Col span={12}>
+                            <Form.Item
+                                span={6}
+                                initialValue={edit ? propData.bathrooms : ""}
+                                name={'bathrooms'}
+                                label="Baños"
+                                rules={[
+                                    {
+                                        type: 'number',
+                                        min: 0,
+                                        max: 20,
+                                    },
+                                    {
+                                        required: true,
+                                    },
+                                ]}
+                            >
+                                <InputNumber style={{ width: '100%' }} />
+                            </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                            <Form.Item
+                                span={6}
+                                label="Parqueaderos"
+                                name="parkings"
+                                rules={[
+                                    {
+                                        type: 'number',
+                                        min: 0,
+                                        max: 20,
+                                    },
+                                    {
+                                        required: true,
+                                    },
+                                ]}
+                            >
+                                <InputNumber style={{ width: '100%' }} />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row gutter={24}>
+                        <Col span={12}>
+                            <Form.Item
+                                span={6}
+                                label="Dormitorios"
+                                name="dormitories"
+                                rules={[
+                                    {
+                                        type: 'number',
+                                        min: 0,
+                                        max: 99,
+                                    },
+                                    {
+                                        required: true,
+                                    },
+                                ]}
+                            >
+                                <InputNumber style={{ width: '100%' }} />
+                            </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                            <Form.Item
+                                span={6}
+                                label="Area"
+                                name="area"
+                                rules={[
+                                    {
+                                        type: 'number',
+                                        min: 0,
+                                        max: 10000,
+                                    },
+                                    {
+                                        required: true,
+                                    },
+                                ]}
+                            >
+                                <InputNumber style={{ width: '100%' }} />
+                            </Form.Item>
 
-                </Col>
-            </Row>
-        </>
-    }
+                        </Col>
+                    </Row>
+                </>
+            }
             <Row gutter={24}>
                 <Col span={12}>
                     <Form.Item

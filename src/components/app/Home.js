@@ -20,7 +20,7 @@ const root = {
 function Home({match}) {
     return (
         <Layout style={root}>
-            <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
+            <Content className="site-layout" style={{paddingTop: 64 }}>
                 <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
                     <Switch>
                         <Route path={`${match.path}/properties`} component={PropertyView}  />

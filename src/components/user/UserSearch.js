@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Modal } from 'antd';
 import UserResults from './UserResults';
 
 
 const UserSearch = () => {
-    const [visible, setVisible] = useState(false);
-    const [profile,setProfile] = useState(null);
     const [profiles,setProfiles] = useState([]);
 
     useEffect(() => {

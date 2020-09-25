@@ -4,7 +4,7 @@ import ProperyList from './PropertyList';
 import PropertyForm from './PropertyForm';
 import { db } from '../../utils/firebase_sdk';
 
-export default function News() {
+export default function PropertyView() {
   const [properties, setProperties] = useState([]);
 
   useEffect(() => {
@@ -29,21 +29,10 @@ export default function News() {
     return unsubscribe;
 
   }, [])
-  // const layout = { xs: '22', sm: '12', md: '12', lg: '12' };
-
-  const root = {
-    height: '100vh',
-    background: 'white',
-    paddingTop: 100,
-  }
 
   return (
     <div >
-      <Row justify="center">
-        <Col xs={22} sm={22} md={22} lg={10}>
-          <PropertyForm />
-        </Col>
-      </Row>
+      <ProperyList properties={properties}/>
     </div>
   );
 }

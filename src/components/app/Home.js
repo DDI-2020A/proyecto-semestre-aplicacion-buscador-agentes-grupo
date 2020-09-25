@@ -2,6 +2,7 @@ import React from 'react'
 import { Layout, Menu, Breadcrumb } from 'antd';
 import PropertyForm from '../properties/PropertyForm';
 import Panel from '../panel/Panel';
+import UserSearch from '../user/UserSearch';
 
 /*ENRUTAMIENTO*/
 import {
@@ -25,7 +26,9 @@ function Home({match}) {
                     <Switch>
                         <Route path={`${match.path}/publish`} component={PropertyForm}  />
                         <Route path={`${match.path}/panel`} component={Panel} />
-                        <Route path={`${match.path}/search`} component={PropertyForm} />
+                        <Route path={`${match.path}/search`} component={UserSearch} />
+                        {/* <Route path={`${match.path}/comments`} component={UserSearch} /> */}
+                        {/* <Route path={`${match.path}/properties`} component={UserSearch} /> */}
                     </Switch>
                 </div>
             </Content>

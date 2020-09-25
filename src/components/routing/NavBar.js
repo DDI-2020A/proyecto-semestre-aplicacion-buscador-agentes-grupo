@@ -39,7 +39,7 @@ export default function NavBar() {
 
     return (
         <Header style={header}>
-            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['5']}>
 
                 <Menu.Item key="1">
                     <Link to="/">

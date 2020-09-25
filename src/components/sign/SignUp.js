@@ -5,7 +5,7 @@ import { Row, Col } from 'antd';
 import { Switch } from 'antd';
 //api
 import { saveUserDoc } from './../../utils/firestore';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const layout = {
     labelCol: {
@@ -80,112 +80,121 @@ const SignForm = () => {
         console.log('Failed:', errorInfo);
     };
     return (
-        <Form {...layout} name="nest-messages" onFinish={onFinish} onFinishFailed={onFinishFailed} validateMessages={validateMessages}>
-
-            <Form.Item
-                name={'name'}
-                label="Nombre"
-                rules={[
-                    {
-                        required: true,
-                    },
-                ]}
-            >
-                <Input />
-            </Form.Item>
-
-            <Form.Item
-                name={'lname'}
-                label="Apellido"
-                rules={[
-                    {
-                        required: true,
-                    },
-                ]}
-            >
-                <Input />
-            </Form.Item>
-
-            <Form.Item
-                label="Correo"
-                name="email"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Porfavor escribe tu email',
-                    },
-                ]}
-            >
-                <Input />
-            </Form.Item>
-
-            <Form.Item
-                label="Contraseña"
-                name="password"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Debes escribir una contraseña',
-                    },
-                ]}
-            >
-                <Input.Password />
-            </Form.Item>
-
-            <Form.Item
-                label="Celular"
-                name="phone"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Porfavor escribe tu número',
-                    },
-                ]}
-            >
-                <Input />
-            </Form.Item>
-
-            <Form.Item
-                name={'address'}
-                label="Dirección"
-                rules={[
-                    {
-                        required: true,
-                    },
-                ]}
-            >
-                <Input />
-            </Form.Item>
-
-            <Form.Item
-                name={'experience'}
-                label="Experiencia (años)"
-                rules={[
-                    {
-                        type: 'number',
-                        min: 0,
-                        max: 99,
-                    },
-                ]}
-            >
-                <InputNumber />
-            </Form.Item>
-
-            <Form.Item label="¿Tienes licencia?">
-                <Switch defaultChecked onChange={switched} />
-            </Form.Item>
-
-            {visible &&
-                <Form.Item name={'licenseCode'} label="Licencia">
+        <>
+            <Row gutter={24} justify="center">
+                <Col>
+                    <h2>
+                        Registrarse
+                    </h2>
+                </Col>
+            </Row>
+            <Form {...layout} name="nest-messages" onFinish={onFinish} onFinishFailed={onFinishFailed} validateMessages={validateMessages}>
+                <Form.Item
+                    name={'name'}
+                    label="Nombre"
+                    rules={[
+                        {
+                            required: true,
+                        },
+                    ]}
+                >
                     <Input />
                 </Form.Item>
-            }
-            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-                <Button type="primary" htmlType="submit">
-                    Registrarse
+
+                <Form.Item
+                    name={'lname'}
+                    label="Apellido"
+                    rules={[
+                        {
+                            required: true,
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    label="Correo"
+                    name="email"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Porfavor escribe tu email',
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    label="Contraseña"
+                    name="password"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Debes escribir una contraseña',
+                        },
+                    ]}
+                >
+                    <Input.Password />
+                </Form.Item>
+
+                <Form.Item
+                    label="Celular"
+                    name="phone"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Porfavor escribe tu número',
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    name={'address'}
+                    label="Dirección"
+                    rules={[
+                        {
+                            required: true,
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    name={'experience'}
+                    label="Experiencia (años)"
+                    rules={[
+                        {
+                            type: 'number',
+                            min: 0,
+                            max: 99,
+                        },
+                    ]}
+                >
+                    <InputNumber />
+                </Form.Item>
+
+                <Form.Item label="¿Tienes licencia?">
+                    <Switch defaultChecked onChange={switched} />
+                </Form.Item>
+
+                {visible &&
+                    <Form.Item name={'licenseCode'} label="Licencia">
+                        <Input />
+                    </Form.Item>
+                }
+                <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+                    <Button type="primary" htmlType="submit">
+                        Registrarse
                 </Button>
-            </Form.Item>
-        </Form>
+                </Form.Item>
+            </Form>
+        </>
+
     );
 }
 const SignUp = () => {

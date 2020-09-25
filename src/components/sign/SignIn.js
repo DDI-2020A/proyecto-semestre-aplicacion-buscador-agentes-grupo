@@ -27,7 +27,7 @@ const SignForm = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const setUser = currentUser => dispatch(setUserAction(currentUser));
-    const currentUser  = useSelector(state =>  state.currentUser);
+    const currentUser = useSelector(state => state.currentUser);
 
     if (currentUser) {
         return <Redirect to="/Home" />
@@ -71,8 +71,15 @@ const SignForm = () => {
         backgroundColor: 'purple'
     }
     return (
-        <Form
-            style={form}
+        <>
+            <Row gutter={24} justify="center">
+                <Col>
+                    <h2>
+                        Entrar
+                    </h2>
+                </Col>
+            </Row>
+            <Form
             {...layout}
             name="basic"
             initialValues={{
@@ -117,7 +124,9 @@ const SignForm = () => {
                 </Button>
             </Form.Item>
         </Form>
-    
+
+
+        </>
     );
 };
 export default function SignIn() {

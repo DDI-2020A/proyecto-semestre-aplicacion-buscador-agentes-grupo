@@ -12,7 +12,11 @@ import image4 from './images/image4.jpg'
 const { Header, Content, Footer } = Layout;
 
 const LandingPage = () => {
-
+  const contactus = {
+    boxShadow: '10px 3px 32px -8px rgba(0,0,0,0.75)',
+    borderRadius: 50,
+    padding: '20px 0px',
+  }
   return (
     <>
       <Layout>
@@ -38,7 +42,7 @@ const LandingPage = () => {
               </>
             }
           ></PageHeader>
-        
+
         </Header>
 
         <Content className='section-carousel'>
@@ -46,10 +50,9 @@ const LandingPage = () => {
             <Col xs={2} sm={4} md={6}></Col>
             <Col xs={20} sm={16} md={12}>
               <div className='quienes-somos'>
-                <h3>¿Quienes somos?</h3>
+                <h3>¿Te dedicas al negocio de bienes raíces?</h3>
                 <p >
-                  Somos una empresa dedicada a la busqueda de bienes raices, y tenemos los mejores agentes
-                inmobiliarios, que te ahorraran largas y tendiosas horas en la busqueda de tu hogar ideal.<br />
+                  Tenemos oportunidades para tí<br />
                 </p>
               </div>
             </Col>
@@ -68,10 +71,11 @@ const LandingPage = () => {
             <Col xs={0} sm={2} md={4} lg={5}></Col>
           </Row>
         </Content>
-        <Content className='section-contact'>
-          <Row>
+
+        <Content  className='section-contact'>
+          <Row >
             <Col span={6}></Col>
-            <Col span={12} className='content-centered--md'>
+            <Col style={contactus} span={12} className='content-centered--md'>
               {/* <div className='layout-contact'> */}
               <h2 className='contact-us-title'>CONTACT US</h2>
               <section>
@@ -111,6 +115,7 @@ const LandingPage = () => {
             <Col span={6}></Col>
           </Row>
         </Content>
+        
         <Footer className='icon-list'>
           <Row>
             <Col flex={2}></Col>

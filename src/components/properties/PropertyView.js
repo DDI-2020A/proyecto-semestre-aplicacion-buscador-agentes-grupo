@@ -4,12 +4,18 @@ import ProperyList from './PropertyList';
 import PropertyForm from './PropertyForm';
 import { db } from '../../utils/firebase_sdk';
 
+import { useDispatch, useSelector } from "react-redux";
+
+
 export default function PropertyView() {
   const [properties, setProperties] = useState([]);
+  const dispatch = useDispatch();
+  const { currentUser } = useSelector(state => state);
+
 
   useEffect(() => {
     const init = async () => {
-      const result = await db.collection('props').orderBy("date", "desc").get();
+      const result = await db.collection('props').where('uid','==',currentUser.uid).get();
       const docs = result.docs.map(
         doc => {
           return doc.data();

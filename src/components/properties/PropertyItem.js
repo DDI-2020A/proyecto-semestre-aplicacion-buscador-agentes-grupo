@@ -2,7 +2,7 @@ import React from 'react'
 import { StarOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
 import { HomeOutlined, AimOutlined, ContainerOutlined } from '@ant-design/icons';
-import { List,Space} from 'antd';
+import { List, Space } from 'antd';
 
 const Detail = ({ detail, icon, stretch }) => {
   const rootStyle = stretch ? { display: 'flex', flexDirection: 'row', paddingTop: '3px', alignItems: 'flex-start' } :
@@ -66,14 +66,15 @@ function Details(props) {
 
 const IconText = ({ icon, text }) => (
   <Space>
-      {React.createElement(icon)}
-      {text}
+    {React.createElement(icon)}
+    {text}
   </Space>
 );
-export default function PropertyItem({item}) {
+export default function PropertyItem({ item }) {
 
   return (
     <List.Item
+      onClick={() => console.log('clicked')}
       key={item.title}
       // actions={[
       //   <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />,
@@ -88,8 +89,8 @@ export default function PropertyItem({item}) {
       }
     >
       <List.Item.Meta
-        title={<a style={{color:'black'}} href={item.href}>{item.title}</a>}
-        description={ <Details propData={item}/ >}
+        title={<a style={{ color: 'black' }} href={item.href}>{item.title}</a>}
+        description={<Details propData={item} />}
       />
       {item.content}
     </List.Item>
